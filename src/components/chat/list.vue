@@ -1,12 +1,17 @@
 <template>
   <div id="list">
     <ul style="padding-left: 0">
+
       <li v-for="item in admins"
-          :class="{ active: item.id === currentSessionId }"
-          v-on:click="changeCurrentSessionId(item.id)"><!--   :class="[item.id === currentSessionId ? 'active':'']" -->
+
+          :class="{ active: currentSession?item.username === currentSession.username:false }"
+          v-on:click="changeCurrentSession(item)">
+
         <img class="avatar" :src="item.userFace" :alt="item.name">
-        <p class="name">{{ item.name }}</p>
+        <el-badge :is-dot="isDot[user.username+'#'+item.username]"><p class="name">{{ item.name }}</p></el-badge>
+
       </li>
+
     </ul>
   </div>
 </template>
@@ -17,15 +22,19 @@ import {mapState} from 'vuex'
 export default {
   name: 'list',
   data() {
-    return {}
+    return {
+      //获取当前用户对象
+      user: JSON.parse(window.sessionStorage.getItem('user'))
+    }
   },
   computed: mapState([
+    'isDot',
     'admins',
-    'currentSessionId'
+    'currentSession'
   ]),
   methods: {
-    changeCurrentSessionId: function (id) {
-      this.$store.commit('changeCurrentSessionId', id)
+    changeCurrentSession: function (currentSession) {
+      this.$store.commit('changeCurrentSession', currentSession)
     }
   }
 }
@@ -34,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 #list {
   li {
-    padding: 0px 15px;
+    padding: 15px 15px;
     border-bottom: 1px solid #292C33;
     cursor: pointer;
 
@@ -57,6 +66,8 @@ export default {
   .name {
     display: inline-block;
     margin-left: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 </style>

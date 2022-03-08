@@ -40,6 +40,8 @@ router.beforeEach((to, from, next) => {
                 if (resp) {
                     //因为sessionStorage中只能存放字符串，所以要将返回信息转为字符串,存入用户信息
                     window.sessionStorage.setItem('user', JSON.stringify(resp))
+                    // //消息发送与接收时需要用到
+                    // store.commit('INIT_CURRENTADMIN', resp)
                     next()
                 }
             })

@@ -15,6 +15,7 @@ export default {
   name: 'card',
   data() {
     return {
+      //获取当前用户对象
       user: JSON.parse(window.sessionStorage.getItem('user'))
     }
   }

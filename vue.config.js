@@ -21,6 +21,14 @@ proxyObj['/'] = {//代理包含 / 信息的路径
 
 }
 
+/**
+ * 请求转发
+ * 在一开始登录首页的时候就建立websocket连接，去vuex里面写连接的方法
+ */
+proxyObj['/ws'] = {
+    ws: true,
+    target: 'ws://localhost:8081'
+}
 
 module.exports = {
     devServer: {

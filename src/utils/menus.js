@@ -1,7 +1,7 @@
 import {getRequest} from "@/utils/api";
 
 /**
- * 菜单请求封装工具
+ * 菜单请求封装工具,获取菜单工具类
  * @param router
  * @param store
  */
@@ -18,6 +18,8 @@ export const initMenu = (router, store) => {
 
             //数据存到vuex里面
             store.commit('initRoutes', fmtRoutes)
+            //连接websocket
+            store.dispatch('connect')
         }
     })
 }
