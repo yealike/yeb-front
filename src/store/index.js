@@ -28,6 +28,10 @@ const store = new Vuex.Store({
     },
     //可以改变state里面值的方法，同步执行的方法
     mutations: {
+        //初始化当前用户，修改当前用户信息的时候可能会用到
+        INIT_ADMIN(state, admin) {
+            state.currentAdmin = admin
+        },
         // INIT_CURRENTADMIN(state,admin){
         //   state.currentAdmin = admin;
         // },

@@ -42,7 +42,11 @@ router.beforeEach((to, from, next) => {
                     window.sessionStorage.setItem('user', JSON.stringify(resp))
                     // //消息发送与接收时需要用到
                     // store.commit('INIT_CURRENTADMIN', resp)
+
+                    // 修改用户信息时需要进行更新
+                    store.commit('INIT_ADMIN',resp)
                     next()
+
                 }
             })
         }

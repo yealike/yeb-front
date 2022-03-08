@@ -66,17 +66,22 @@ export default {
   name: "Home",
   data() {
     return {
-      user: JSON.parse(window.sessionStorage.getItem('user'))
+      //因为修改用户信息时导致用户信息不同步，所有获取用户信息的方式发生了变化，改用计算属性
+      // user: JSON.parse(window.sessionStorage.getItem('user'))
     }
   },
   computed: {
     routes() {
       return this.$store.state.routes
+    },
+    user(){
+      //获取vuex的用户对象
+      return this.$store.state.currentAdmin;
     }
   },
   methods: {
     //去聊天
-    goChat(){
+    goChat() {
       this.$router.push('/chat')
     },
     commandHandler(command) {
@@ -100,8 +105,9 @@ export default {
             message: '已取消'
           });
         });
-
-
+      }
+      if (command === 'userInfo') {
+        this.$router.push('/userinfo')
       }
     }
   }
@@ -134,14 +140,16 @@ export default {
   border-radius: 24px;
   margin-left: 8px;
 }
-.homeWelcome{
+
+.homeWelcome {
   text-align: center;
   font-size: 30px;
   font-family: 华文行楷;
   color: skyblue;
   padding-top: 50px;
 }
-.homeRouterView{
+
+.homeRouterView {
   margin-top: 10px;
 }
 </style>
